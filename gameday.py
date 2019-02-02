@@ -35,10 +35,11 @@ class GameDay:
         self.pass_count = 0
         self.estimate = 0
 
-    # Allows for Chrome Driver to run the AdBlock extension, which reduced runtime execution substantially    
+    # Allows for Chrome Driver to run the AdBlock extension, which reduced runtime execution substantially. 
+    # Set path to where you have the extension saved on your local machine. 
     # More indepth detail here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver
     def set_options(self):
-        path_to_extension = r'C:\Users\mting\Desktop\3.31.2_0'
+        path_to_extension = ""
         chrome_options = Options()
         chrome_options.add_argument('load-extension=' + path_to_extension)
         return(chrome_options)
