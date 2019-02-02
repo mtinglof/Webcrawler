@@ -1,4 +1,12 @@
-#This is webcrawler code created by mting
+# This is my first attempt at creating a web crawler to strip data from the soccer stats page whoscored.com. The main purpose would be to 
+# compile this data is a usable format to be used for statistical analysis. 
+
+# The program includes three classes. The first is the WebCrawler class, and is the main body of the program. 
+# The second and third were specific user creations for statistical analysis. The class Data assigns certain weights to the data collected based on instantiated parameters. 
+# The third class Combos creations combination of players based on a certain criteria (for example dollar cost of having a player on a team). 
+
+# Import note along with standard imports. The program runs by pulling player names from an excel file. This option can be changed at user’s discretion. 
+# For example, you may change the setting to read in names from a .txt file 
 
 from bs4 import BeautifulSoup as soup
 import itertools
@@ -20,19 +28,22 @@ class GameDay:
     def __init__(self, starting_url, file_name, score_type):
         self.starting_url = starting_url
         self.browser = webdriver.Chrome(chrome_options=self.set_options())
-        self.orginal = pd.read_excel("mmb.xlsx", sheet_name='Sheet1')
+        self.orginal = pd.read_excel("", sheet_name='Sheet1') #excel file here 
         self.score_type = score_type
         self.scores = []
         self.start_time = 0
         self.pass_count = 0
         self.estimate = 0
 
+    # Allows for Chrome Driver to run the AdBlock extension, which reduced runtime execution substantially    
+    # More indepth detail here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver
     def set_options(self):
         path_to_extension = r'C:\Users\mting\Desktop\3.31.2_0'
         chrome_options = Options()
         chrome_options.add_argument('load-extension=' + path_to_extension)
         return(chrome_options)
-        
+
+    # Data collection routine (including weight assignment call) and combinations call    
     def open(self):
         self.browser.create_options()
         self.browser.get(self.starting_url)
@@ -49,6 +60,7 @@ class GameDay:
         self.browser.close()
         Combos(self.orginal).make_combos()
         
+    # A time estimation based on average time spent compiling data on players, times how many players are left 
     def time(self):
         self.pass_count += 1
         self.estimate = time.time() - self.start_time
@@ -59,6 +71,8 @@ class GameDay:
         self.start_time = time.time()
         return
 
+    # Routine that searches players name. Try Except block incase of multiple names of a player, 
+    # allowing for user to click the proper name and letting the program continue  
     def search(self, name):
         search_bar = self.browser.find_element_by_id("search-box")
         search_bar.send_keys(name)
@@ -75,6 +89,9 @@ class GameDay:
             input()
         self.get_data_from_page() 
 
+    # Scrapper routine. Several Try Catch blocks in case web elements have not loaded by the time line execution occurs. 
+    # Blocks also allow for user to help identify elements for the program.   
+    # This routine is specifically meant to scrap from whoscored.com. Different sites would result in specific changes in this section. 
     def get_data_from_page(self):
         titles = ["player-tournament-stats-summary", "player-tournament-stats-defensive", "player-tournament-stats-offensive", 
         "player-tournament-stats-passing", "player-tournament-stats-detailed"]
@@ -153,6 +170,8 @@ class GameDay:
         avg_final[1][4], avg_final[1][2], avg_final[1][3], avg_final[0][4], avg_final[0][5], avg_final[3][4], avg_final[3][5], 
         avg_final[4][2]))
         global position
+        # The final call would be to pass all collected data to the class Data. 
+        # This class was designed by me to assign specific weights to certain data collected on the player to be used later for analysis.  
         self.scores.append(Data(data, self.score_type, position).calculate_score())
         return
 
@@ -186,6 +205,7 @@ class Data:
             score = score + .05*(self.AvgP*(self.PSP*.01))
         return score
 
+# As stated in the preamble, this class creates combinations of players based on a certain criterion.   
 class Combos: 
     def __init__(self, data_frame):
         self.data_frame = data_frame
@@ -195,6 +215,7 @@ class Combos:
         self.estimate = 0
         return 
 
+    # Rudimentary timer calculated based on average time taken to complete a certain task. 
     def time(self):
         self.pass_count += 1
         elapsed = time.time() - self.start_time
@@ -205,7 +226,9 @@ class Combos:
         print("Estimated time until completion: %ihrs %imins" % (hrs, mins))
         self.start_time = time.time()
         return
-    
+        
+    # A routine that creates combination of players and scores their overall effectiveness. A high score is tracked to reduce runtime. 
+    # When a team beats the high score, they are written to file and are used as the new high score.  
     def make_combos(self):
         team_roster = []
         data_set = []
