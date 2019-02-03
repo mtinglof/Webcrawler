@@ -38,3 +38,8 @@ Pull requests are gladly accepted. Parts of the code can be used for other WebCr
 - Chrome Driver: http://chromedriver.chromium.org/getting-started 
 - AdBlock Extension: https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver
 - My Homepage: https://github.com/mtinglof
+
+## Licensing
+
+This project is licensed under Unlicense license. This license does not require
+you to take the license with you to your project.
