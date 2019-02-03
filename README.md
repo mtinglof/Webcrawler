@@ -33,5 +33,6 @@ Pull requests are gladly accepted. Parts of the code can be used for other WebCr
 ## Links
 
 -Repository: https://github.com/mtinglof/webcrawler
+
 -AdBlock Extension: https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver
 -My Homepage: https://github.com/mtinglof
