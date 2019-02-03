@@ -24,9 +24,35 @@ It is also recommended that you configure the AdBlock extension for the ChromeDr
 
 The program itself is very versatile, with much of the functionality focused on data manipulation with excel files. Two out of the three classes within the program are designed to assign personalized weight systems to the collect data as well as create optimized lists of players based on a per determined criteria. In addition, a very rudimentary completion timer is implemented. 
 
-## Configuration
+#### Argument 1
+Type: `String`  
 
-To initialize the program three parameters are passed. The first one is the website for the scrapping, the second and third are personal parameters that set the weight system that is applied to the collected data. 
+Pass the site you wish to scrap from. Initially the site used was whoscored.com
+
+Example:
+```
+GameDay("https://www.whoscored.com/") 
+```
+
+#### Argument 2
+Type: `String`  
+
+File name, initially configured for .xlsx file 
+
+Example:
+```
+GameDay("https://www.whoscored.com/", "mmb") 
+```
+
+#### Argument 3
+Type: `String`  
+
+Sets the weight type for data collected. Can be set to string "yes" or "no" 
+
+Example:
+```
+GameDay("https://www.whoscored.com/", "mmb", "yes") 
+```
 
 ## Contributing
 
