@@ -16,7 +16,7 @@ pip install selenium
 
 ### Initial Configuration
 
-It is also recommended that you configure the AdBlock extension for the ChromeDriver. More information can be found here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver and the path to the extension should be set within the program. 
+It is recommended that you configure the AdBlock extension for the ChromeDriver. More information can be found here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver and the path to the extension should be set within the program. 
 
 ## Features
 
