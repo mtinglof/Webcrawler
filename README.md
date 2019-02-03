@@ -18,7 +18,7 @@ pip install selenium
 
 A Chrome Driver is used to scrap data from the web. It is required that the Chrome Driver is saved to your local machine and the path is properly set in the program. More information about the Chrome Driver can be found here http://chromedriver.chromium.org/getting-started 
 
-It is recommended that you configure the AdBlock extension for the ChromeDriver. More information can be found here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver and the path to the extension should be set within the program. 
+It is also recommended that you configure the AdBlock extension for the ChromeDriver. More information can be found here https://stackoverflow.com/questions/42231604/how-to-activate-adblocker-in-chrome-using-selenium-webdriver and the path to the extension should be set within the program. 
 
 ## Features
 
